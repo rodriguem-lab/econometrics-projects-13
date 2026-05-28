@@ -1,0 +1,23 @@
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+*.log
+
+# Local temp files
+/private/
+
+# Experimental or generated duplicates not needed for sharing
+analysis_outputs/analysis_report.md
+analysis_outputs/distribution_plots.png
+analysis_outputs/rate_gap_boxplot_sample.png
+analysis_outputs/scatter_plots.png
+analysis_outputs/panel_data.csv
+
+# Public repo exclusions for licensing/course-material reasons
+Household-mobility-and-mortgage-rate-lock_2025_Journal-of-Financial-Economic.pdf
+2026 01 17 FTD PANEL Replication Questions Template (2).docx
+2026 05 17 FTD PANEL Replication list of papers (2).docx
+
+# Large local replication package data: download from official source instead
+Data for Household Mobility and Mortgage Rate Lock/

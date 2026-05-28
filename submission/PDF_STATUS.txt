@@ -1,0 +1,13 @@
+PDF export was not generated in this local environment.
+
+What is ready:
+- full_replication_answers.docx
+- full_replication_answers.tex
+- full_replication_answers.html
+
+Why the PDF is missing:
+- `pandoc` is available
+- but no local LaTeX engine (`pdflatex`, `xelatex`) or HTML-to-PDF tool (`wkhtmltopdf`) was installed
+- the built-in `cupsfilter` path did not support the generated HTML file in this workspace
+
+So the project is finalized as far as the current environment allowed, and the DOCX/TEX versions are ready for direct PDF export on a machine with a PDF engine.

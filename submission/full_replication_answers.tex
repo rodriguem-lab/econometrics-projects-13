@@ -1,0 +1,1178 @@
+\hypertarget{panel-data-econometrics-homework-partial-replication}{%
+\section{Panel Data Econometrics Homework: Partial
+Replication}\label{panel-data-econometrics-homework-partial-replication}}
+
+\hypertarget{name-of-student}{%
+\subsection{Name of student}\label{name-of-student}}
+
+To fill in.
+
+\hypertarget{identification-of-the-replicated-paper}{%
+\subsection{1. Identification of the replicated
+paper}\label{identification-of-the-replicated-paper}}
+
+\textbf{APA reference.} Liebersohn, J., \& Rothstein, J. (2025).
+\emph{Household mobility and mortgage rate lock}. \emph{Journal of
+Financial Economics}, article 103973.
+https://doi.org/10.1016/j.jfineco.2024.103973
+
+\textbf{Link to the paper.}
+https://doi.org/10.1016/j.jfineco.2024.103973
+
+\hypertarget{table-1-key-correlation-of-the-paper}{%
+\subsubsection{Table 1: Key correlation of the
+paper}\label{table-1-key-correlation-of-the-paper}}
+
+\begin{itemize}
+\tightlist
+\item
+  Dependent variable Y: \texttt{move\_flag}, an indicator equal to 1
+  when a household changes ZIP code between quarters.
+\item
+  Name and link to the website of data source for updates for Y:
+  synthetic replication package built from UC-CCP-style credit registry
+  data, public access through Mendeley:
+  https://doi.org/10.17632/74sfv9kx9n.1
+\item
+  Key preferred explanatory variable X: \texttt{rate\_gap}, computed as
+  the current market mortgage rate minus the household's implied
+  mortgage rate on the outstanding mortgage.
+\item
+  Name and link to the website of data source for updates for X: Freddie
+  Mac mortgage rates through FRED (\texttt{MORTGAGE30US}):
+  https://fred.stlouisfed.org/series/MORTGAGE30US
+\end{itemize}
+
+\textbf{Selected level(s).} Households.
+
+\textbf{Link to the data set.} https://doi.org/10.17632/74sfv9kx9n.1
+
+\textbf{Links to the data set sources.}
+
+\begin{itemize}
+\tightlist
+\item
+  Replication package data: https://doi.org/10.17632/74sfv9kx9n.1
+\item
+  FRED mortgage rate series:
+  https://fred.stlouisfed.org/series/MORTGAGE30US
+\item
+  Paper DOI: https://doi.org/10.1016/j.jfineco.2024.103973
+\end{itemize}
+
+\hypertarget{abstract-100-words}{%
+\subsection{2. Abstract (100 words)}\label{abstract-100-words}}
+
+This partial replication studies whether households move less when their
+existing mortgage rate is below the current market rate. Using the
+synthetic replication package for Liebersohn and Rothstein, I build a
+quarterly household panel from 2012Q1 to 2024Q3, merge mobility events
+with mortgage characteristics, and construct a household-level rate-gap
+measure. I document panel structure, variable transformations,
+descriptive statistics, heterogeneity, and standard panel estimators.
+Across between, within, two-way fixed effects, and first-difference
+regressions, the estimated relationship between mobility and the rate
+gap is small and generally statistically insignificant in this synthetic
+sample. The exercise remains informative for panel-data workflow and
+diagnostics.
+
+\hypertarget{introduction}{%
+\subsection{3. Introduction}\label{introduction}}
+
+The main contribution of this partial replication is methodological
+rather than a full reproduction of the authors' confidential-data hazard
+framework. The public package contains synthetic data with the same
+structure as the original registry-based data, so the present exercise
+focuses on building a coherent household-quarter panel, implementing
+panel transformations, and checking what survives under between, within,
+first-difference, and two-way fixed-effects approaches. This is already
+useful because the econometric template asks for an ordered diagnostic
+study of the panel before estimation.
+
+Relative to the paper, the present work highlights three things not
+emphasized in the published result. First, the synthetic panel is almost
+ideal from a teaching perspective: after selection it is balanced, has
+no holes, and therefore allows clean comparisons between within, FD and
+TWFE transformations. Second, nearly all of the variance of the key
+variables comes from the within dimension, which means the key
+identifying variation is essentially time variation within households
+rather than persistent cross-sectional heterogeneity. Third, once the
+data are reduced to this simplified binary mobility outcome and linear
+panel estimators, the estimated rate-gap effect is weak.
+
+This does not invalidate the paper. Instead, it clarifies that the
+published paper relies on a richer hazard-based design, broader
+controls, and confidential micro-data structure that cannot be perfectly
+mirrored here. The value of the present replication is therefore to show
+a disciplined panel-data workflow, to quantify the differences between
+transformed variables, and to explain carefully where the simplified
+public exercise is aligned with the paper and where it is not.
+
+\hypertarget{table-2-key-items-found-by-order-of-interest-of-this-partial-replication}{%
+\subsubsection{Table 2: Key items found by order of interest of this
+partial
+replication}\label{table-2-key-items-found-by-order-of-interest-of-this-partial-replication}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The selected sample is fully balanced after dynamic-panel selection:
+  1,000 households observed quarterly from 2012Q1 to 2024Q3.
+\item
+  The within variance share is extremely high for \texttt{move\_flag},
+  \texttt{rate\_gap}, \texttt{mortgage\_rate\_annual}, and
+  \texttt{loan\_age\_years}, indicating that household time variation
+  dominates cross-sectional variation.
+\item
+  The association between mobility and the rate gap remains weak under
+  transformed specifications; it is near zero in within and TWFE and
+  mildly negative only in first differences.
+\item
+  Heterogeneity is substantial across households: some households have
+  strongly positive local correlations and others strongly negative
+  ones, even when the pooled average is near zero.
+\item
+  The dynamic FD specification shows limited persistence and weak
+  instruments in the simplified Anderson-Hsiao style setup, which
+  cautions against over-interpreting dynamic coefficients in this public
+  sample.
+\end{enumerate}
+
+\hypertarget{database-update}{%
+\subsection{4. Database update}\label{database-update}}
+
+The replication package includes a local \texttt{MORTGAGE30US.csv} file
+ending on 2023-06-08. I updated the market-rate series using the
+official FRED download endpoint before running the final homework
+script. This update matters because the mortgage-payment panel extends
+to 2024Q3, and without the refreshed FRED series the \texttt{rate\_gap}
+variable would be missing near the end of the sample. No new households
+were added because the synthetic micro-data are fixed by the replication
+package. The main limitation is that the public package still uses
+synthetic registry data rather than the confidential underlying data
+used in the paper.
+
+\hypertarget{table-3-data-characteristics}{%
+\subsubsection{Table 3: Data
+characteristics}\label{table-3-data-characteristics}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.50}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.50}}@{}}
+\toprule
+Item & Value \\
+\midrule
+\endhead
+Maximal time span & 2012Q1 to 2024Q3 \\
+Frequency & Quarterly \\
+Number of individuals & Ntotal = 1000 \\
+Maximal number of time observations for an individual & Tmax = 51 \\
+Balanced or unbalanced panel & Balanced \\
+Update & FRED mortgage rates updated beyond the local 2023-06-08 cutoff
+so that market-rate coverage matches the panel through 2024Q3 \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{panel-data-sample-selection}{%
+\subsection{5. Panel data sample
+selection}\label{panel-data-sample-selection}}
+
+The selection rule is at least three consecutive observations of the
+dependent variable for each household. In this synthetic mortgage panel,
+every household satisfies this rule.
+
+\textbf{Panel data sample selection.}
+
+\begin{itemize}
+\tightlist
+\item
+  Individuals excluded from the panel data selection: 0
+\item
+  Individuals with at least three consecutive observations for the
+  dependent variable: N1 = 1000
+\item
+  Ntotal - N1 = 0
+\item
+  Maximal time span for an individual: 2012Q1 to 2024Q3
+\item
+  List of excluded individuals: None
+\item
+  List of kept individuals: omitted here because there are 1,000
+  households; the full list is the set of all \texttt{personid} in
+  \texttt{panel\_data.csv}.
+\end{itemize}
+
+\textbf{Comment on sample-selection bias.} There is no observed
+selection bias induced by the three-consecutive-observations rule in
+this synthetic sample because no household is dropped. This is
+convenient for pedagogy but also a limitation: the public synthetic data
+understate the attrition and irregular observation issues commonly found
+in real household panels.
+
+\hypertarget{sample-selection-within-an-unbalanced-panel}{%
+\subsection{6. Sample selection within an unbalanced
+panel}\label{sample-selection-within-an-unbalanced-panel}}
+
+Although the template asks for the analysis of an unbalanced panel, the
+selected sample is in fact balanced. Therefore the diagnostics below are
+still reported, but they mechanically show no attrition and no holes.
+
+\hypertarget{number-of-individuals-per-date}{%
+\subsubsection{Number of individuals per
+date}\label{number-of-individuals-per-date}}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+quarter & N \\
+\midrule
+\endhead
+2012Q1 & 1000 \\
+2012Q2 & 1000 \\
+2012Q3 & 1000 \\
+2012Q4 & 1000 \\
+2013Q1 & 1000 \\
+2013Q2 & 1000 \\
+2013Q3 & 1000 \\
+2013Q4 & 1000 \\
+2014Q1 & 1000 \\
+2014Q2 & 1000 \\
+2014Q3 & 1000 \\
+2014Q4 & 1000 \\
+2015Q1 & 1000 \\
+2015Q2 & 1000 \\
+2015Q3 & 1000 \\
+2015Q4 & 1000 \\
+2016Q1 & 1000 \\
+2016Q2 & 1000 \\
+2016Q3 & 1000 \\
+2016Q4 & 1000 \\
+2017Q1 & 1000 \\
+2017Q2 & 1000 \\
+2017Q3 & 1000 \\
+2017Q4 & 1000 \\
+2018Q1 & 1000 \\
+2018Q2 & 1000 \\
+2018Q3 & 1000 \\
+2018Q4 & 1000 \\
+2019Q1 & 1000 \\
+2019Q2 & 1000 \\
+2019Q3 & 1000 \\
+2019Q4 & 1000 \\
+2020Q1 & 1000 \\
+2020Q2 & 1000 \\
+2020Q3 & 1000 \\
+2020Q4 & 1000 \\
+2021Q1 & 1000 \\
+2021Q2 & 1000 \\
+2021Q3 & 1000 \\
+2021Q4 & 1000 \\
+2022Q1 & 1000 \\
+2022Q2 & 1000 \\
+2022Q3 & 1000 \\
+2022Q4 & 1000 \\
+2023Q1 & 1000 \\
+2023Q2 & 1000 \\
+2023Q3 & 1000 \\
+2023Q4 & 1000 \\
+2024Q1 & 1000 \\
+2024Q2 & 1000 \\
+2024Q3 & 1000 \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{number-of-individuals-with-the-same-number-of-temporal-observations}{%
+\subsubsection{Number of individuals with the same number of temporal
+observations}\label{number-of-individuals-with-the-same-number-of-temporal-observations}}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+quarter & number\_of\_individuals \\
+\midrule
+\endhead
+51 & 1000 \\
+\bottomrule
+\end{longtable}
+
+\begin{itemize}
+\tightlist
+\item
+  Number of individuals with holes: 0
+\item
+  Proportion with holes: 0.00\%
+\item
+  List with holes: {[}{]}
+\end{itemize}
+
+\textbf{Comment.} There is no attrition at the beginning or at the end
+of the sample and no discontinuity pattern. This again reflects the
+synthetic design of the teaching data rather than the full complexity of
+the confidential panel behind the paper.
+
+\hypertarget{panel-data-variables-classification}{%
+\subsection{7. Panel data variables
+classification}\label{panel-data-variables-classification}}
+
+\hypertarget{table-4-variable-count-by-categories}{%
+\subsubsection{Table 4: Variable count by
+categories}\label{table-4-variable-count-by-categories}}
+
+\begin{itemize}
+\tightlist
+\item
+  Variables varying with two indices: rate\_gap, mortgage\_rate\_annual,
+  move\_flag, log\_balance, balance\_to\_orig, loan\_age\_years
+\item
+  Time-invariant variables (100\% between variance): None in the
+  selected variable set
+\item
+  Individual-invariant variables (0\% between variance): market\_rate,
+  trend
+\item
+  Number K = 6
+\item
+  K1 = 0
+\item
+  K2 = 2
+\end{itemize}
+
+\hypertarget{table-5-time-varying-variables-sorted-by-within-share}{%
+\subsubsection{Table 5: Time-varying variables sorted by within
+share}\label{table-5-time-varying-variables-sorted-by-within-share}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}@{}}
+\toprule
+variable & N & NT & NT\_over\_N & overall\_var & between\_var &
+within\_var & within\_share \\
+\midrule
+\endhead
+rate\_gap & 1000 & 48737 & 48.737000 & 1.889807 & 0.011398 & 1.919089 &
+1.015495 \\
+mortgage\_rate\_annual & 1000 & 48737 & 48.737000 & 0.456431 & 0.010072
+& 0.457020 & 1.001292 \\
+move\_flag & 1000 & 51000 & 51.000000 & 0.125795 & 0.002460 & 0.125802 &
+1.000055 \\
+log\_balance & 1000 & 51000 & 51.000000 & 2.032352 & 0.045471 & 2.026625
+& 0.997182 \\
+balance\_to\_orig & 1000 & 51000 & 51.000000 & 44131.307643 &
+2576.719555 & 42387.425478 & 0.960484 \\
+loan\_age\_years & 1000 & 51000 & 51.000000 & 2.393774 & 0.510415 &
+1.921499 & 0.802707 \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{time-invariant-variables-100-between-variance}{%
+\subsubsection{Time-invariant variables (100\% between
+variance)}\label{time-invariant-variables-100-between-variance}}
+
+None in the selected set.
+
+\hypertarget{individual-invariant-variables-0-between-variance}{%
+\subsubsection{Individual-invariant variables (0\% between
+variance)}\label{individual-invariant-variables-0-between-variance}}
+
+\begin{longtable}[]{@{}llllllll@{}}
+\toprule
+variable & N & NT & NT\_over\_N & overall\_var & between\_var &
+within\_var & within\_share \\
+\midrule
+\endhead
+market\_rate & 1000 & 51000 & 51.000000 & 1.427681 & 0.000000 & 1.456206
+& 1.019980 \\
+trend & 1000 & 51000 & 51.000000 & 216.670915 & 0.000000 & 221.000000 &
+1.019980 \\
+\bottomrule
+\end{longtable}
+
+\textbf{Comment.} The key dependent variable \texttt{move\_flag} and the
+key explanatory variable \texttt{rate\_gap} both have very high within
+shares. This means that the informative variation for the homework
+mostly comes from the evolution of a household over time rather than
+from persistent differences across households. The common mortgage-rate
+series (\texttt{market\_rate}) and the deterministic time trend are
+individual-invariant variables, so they are wiped out by time dummies
+and/or by TWFE transformation.
+
+\hypertarget{between-plus-one-way-within-decomposition}{%
+\subsection{8. Between plus one-way within
+decomposition}\label{between-plus-one-way-within-decomposition}}
+
+\hypertarget{descriptive-statistics-for-the-dependent-variable-move_flag}{%
+\subsubsection{\texorpdfstring{Descriptive statistics for the dependent
+variable
+\texttt{move\_flag}}{Descriptive statistics for the dependent variable move\_flag}}\label{descriptive-statistics-for-the-dependent-variable-move_flag}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}@{}}
+\toprule
+transform & n & mean & median & sd & se & min & q1 & q3 & max & skew &
+kurtosis & std\_min & std\_max \\
+\midrule
+\endhead
+between & 51000 & 0.147569 & 0.137255 & 0.049571 & 0.049571 & 0.019608 &
+0.117647 & 0.176471 & 0.333333 & 0.387867 & 3.335060 & -2.581353 &
+3.747432 \\
+within & 51000 & -0.000000 & -0.137255 & 0.351194 & 0.351194 & -0.333333
+& -0.176471 & -0.098039 & 0.980392 & 1.929329 & 4.877890 & -0.949143 &
+2.791596 \\
+fd & 50000 & 0.003060 & 0.000000 & 0.503007 & 0.503007 & -1.000000 &
+0.000000 & 0.000000 & 1.000000 & 0.005794 & 3.952401 & -1.994129 &
+1.981962 \\
+twfe & 51000 & 0.000000 & -0.128686 & 0.346629 & 0.346629 & -0.614549 &
+-0.171902 & -0.074863 & 1.070353 & 1.874439 & 4.867251 & -1.772930 &
+3.087892 \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{descriptive-statistics-for-the-preferred-explanatory-variable-rate_gap}{%
+\subsubsection{\texorpdfstring{Descriptive statistics for the preferred
+explanatory variable
+\texttt{rate\_gap}}{Descriptive statistics for the preferred explanatory variable rate\_gap}}\label{descriptive-statistics-for-the-preferred-explanatory-variable-rate_gap}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}@{}}
+\toprule
+transform & n & mean & median & sd & se & min & q1 & q3 & max & skew &
+kurtosis & std\_min & std\_max \\
+\midrule
+\endhead
+between & 51000 & 4.092290 & 4.114000 & 0.106710 & 0.106710 & 3.576468 &
+4.037769 & 4.168272 & 4.290295 & -1.112028 & 4.861055 & -4.833877 &
+1.855547 \\
+within & 48737 & 0.000000 & -0.282254 & 1.370572 & 1.370572 & -11.919270
+& -0.686838 & 0.303433 & 3.655761 & -0.226394 & 8.734244 & -8.696563 &
+2.667325 \\
+fd & 45668 & 0.049493 & -0.003593 & 1.036280 & 1.036280 & -11.849085 &
+-0.242456 & 0.290738 & 12.431947 & -0.034364 & 40.936045 & -11.482011 &
+11.948947 \\
+twfe & 48737 & -0.000000 & 0.110874 & 0.668686 & 0.668686 & -11.335833 &
+0.015642 & 0.199821 & 0.795920 & -8.586655 & 100.252310 & -16.952390 &
+1.190274 \\
+\bottomrule
+\end{longtable}
+
+The within-transformed mobility indicator is highly non-normal and
+discrete, with many observations concentrated near household means. The
+between distribution of \texttt{rate\_gap} is tighter than the within
+distribution, which is consistent with the idea that market rates and
+loan-specific conditions move substantially over time within households.
+The graphs saved in
+\texttt{analysis\_outputs/move\_flag\_transforms.png} and
+\texttt{analysis\_outputs/rate\_gap\_transforms.png} display the
+histogram, KDE, and matching normal approximation requested in the
+template.
+
+\hypertarget{first-differences-versus-two-way-fixed-effects}{%
+\subsection{9. First differences versus two-way fixed
+effects}\label{first-differences-versus-two-way-fixed-effects}}
+
+Because the selected sample is balanced, the closed-form TWFE
+transformation \texttt{x\_it\ -\ x\_i.\ -\ x\_.t\ +\ x\_..} is well
+defined and coincides with the regression-residual interpretation. For
+first differences, the first observation of each individual is missing
+by construction. The file \texttt{analysis\_outputs/fd\_first30.csv}
+reports the first 30 stacked observations of first differences and their
+lags, and one can verify that each individual switch generates missing
+first differences rather than cross-household subtraction.
+
+\hypertarget{between-vs-within-correlation-matrix}{%
+\subsubsection{Between vs within correlation
+matrix}\label{between-vs-within-correlation-matrix}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}@{}}
+\toprule
+index & move\_flag\_between & rate\_gap\_between &
+balance\_to\_orig\_between & loan\_age\_years\_between &
+log\_balance\_between \\
+\midrule
+\endhead
+move\_flag\_between & 1.000000 & 0.052314 & 0.004630 & -0.416690 &
+0.001786 \\
+rate\_gap\_between & 0.052314 & 1.000000 & -0.003660 & -0.028802 &
+0.473497 \\
+balance\_to\_orig\_between & 0.004630 & -0.003660 & 1.000000 & -0.001591
+& -0.083276 \\
+loan\_age\_years\_between & -0.416690 & -0.028802 & -0.001591 & 1.000000
+& 0.024215 \\
+log\_balance\_between & 0.001786 & 0.473497 & -0.083276 & 0.024215 &
+1.000000 \\
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.14}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.14}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.14}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.14}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.14}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.14}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.14}}@{}}
+\toprule
+index & move\_flag\_within & rate\_gap\_within &
+balance\_to\_orig\_within & loan\_age\_years\_within &
+log\_balance\_within & trend\_within \\
+\midrule
+\endhead
+move\_flag\_within & 1.000000 & 0.004038 & -0.007428 & -0.174514 &
+0.004541 & 0.014490 \\
+rate\_gap\_within & 0.004038 & 1.000000 & -0.002453 & 0.057984 &
+0.243703 & 0.466081 \\
+balance\_to\_orig\_within & -0.007428 & -0.002453 & 1.000000 & -0.005025
+& 0.022447 & -0.004764 \\
+loan\_age\_years\_within & -0.174514 & 0.057984 & -0.005025 & 1.000000 &
+-0.005559 & 0.252264 \\
+log\_balance\_within & 0.004541 & 0.243703 & 0.022447 & -0.005559 &
+1.000000 & 0.000096 \\
+trend\_within & 0.014490 & 0.466081 & -0.004764 & 0.252264 & 0.000096 &
+1.000000 \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{twfe-vs-fd-correlation-matrix}{%
+\subsubsection{TWFE vs FD correlation
+matrix}\label{twfe-vs-fd-correlation-matrix}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}@{}}
+\toprule
+index & move\_flag\_twfe & rate\_gap\_twfe & balance\_to\_orig\_twfe &
+loan\_age\_years\_twfe & log\_balance\_twfe \\
+\midrule
+\endhead
+move\_flag\_twfe & 1.000000 & 0.001892 & -0.007375 & -0.198220 &
+0.004439 \\
+rate\_gap\_twfe & 0.001892 & 1.000000 & 0.006838 & -0.000247 &
+0.482349 \\
+balance\_to\_orig\_twfe & -0.007375 & 0.006838 & 1.000000 & -0.003654 &
+0.022366 \\
+loan\_age\_years\_twfe & -0.198220 & -0.000247 & -0.003654 & 1.000000 &
+-0.003955 \\
+log\_balance\_twfe & 0.004439 & 0.482349 & 0.022366 & -0.003955 &
+1.000000 \\
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}@{}}
+\toprule
+index & move\_flag\_fd & rate\_gap\_fd & balance\_to\_orig\_fd &
+loan\_age\_years\_fd & log\_balance\_fd & move\_flag\_fd\_lag1 &
+rate\_gap\_fd\_lag1 \\
+\midrule
+\endhead
+move\_flag\_fd & 1.000000 & -0.007410 & -0.014307 & -0.305840 & 0.001279
+& -0.503768 & 0.000742 \\
+rate\_gap\_fd & -0.007410 & 1.000000 & 0.006575 & -0.006187 & 0.450417 &
+0.006452 & -0.412148 \\
+balance\_to\_orig\_fd & -0.014307 & 0.006575 & 1.000000 & 0.007372 &
+0.029813 & 0.002737 & -0.001369 \\
+loan\_age\_years\_fd & -0.305840 & -0.006187 & 0.007372 & 1.000000 &
+-0.003815 & 0.005156 & -0.007473 \\
+log\_balance\_fd & 0.001279 & 0.450417 & 0.029813 & -0.003815 & 1.000000
+& 0.004003 & -0.230097 \\
+move\_flag\_fd\_lag1 & -0.503768 & 0.006452 & 0.002737 & 0.005156 &
+0.004003 & 1.000000 & -0.007216 \\
+rate\_gap\_fd\_lag1 & 0.000742 & -0.412148 & -0.001369 & -0.007473 &
+-0.230097 & -0.007216 & 1.000000 \\
+\bottomrule
+\end{longtable}
+
+The simple correlations between transformed mobility and transformed
+rate-gap variables remain weak in absolute value, usually below 0.1,
+which is exactly the kind of diagnostic the template asks us to note
+before moving to regressions. The strongest correlations are mostly
+among explanatory variables and their lags rather than between the
+dependent variable and the key explanatory variable.
+
+\hypertarget{investigating-bivariate-heterogeneity-by-individuals-for-twfe-and-fd}{%
+\subsection{10. Investigating bivariate heterogeneity by individuals for
+TWFE and
+FD}\label{investigating-bivariate-heterogeneity-by-individuals-for-twfe-and-fd}}
+
+\hypertarget{fd-heterogeneity-table-top-15-households}{%
+\subsubsection{FD heterogeneity table (top 15
+households)}\label{fd-heterogeneity-table-top-15-households}}
+
+\begin{longtable}[]{@{}lllllll@{}}
+\toprule
+personid & T\_i & corr & sd\_y & sd\_x & sd\_ratio & beta \\
+\midrule
+\endhead
+A865000 & 48 & 0.487346 & 0.291730 & 0.716015 & 0.407436 & 0.198562 \\
+A114000 & 46 & 0.457269 & 0.493924 & 2.083628 & 0.237050 & 0.108396 \\
+A749000 & 46 & 0.433213 & 0.446673 & 1.092391 & 0.408895 & 0.177139 \\
+A633000 & 48 & 0.410655 & 0.545777 & 0.608111 & 0.897495 & 0.368561 \\
+A464000 & 41 & 0.408283 & 0.523823 & 0.441959 & 1.185229 & 0.483910 \\
+A806000 & 42 & 0.402288 & 0.538851 & 1.353879 & 0.398005 & 0.160113 \\
+A597000 & 48 & 0.399628 & 0.635462 & 0.432059 & 1.470775 & 0.587763 \\
+A198000 & 48 & 0.389519 & 0.601048 & 0.898755 & 0.668757 & 0.260494 \\
+A963000 & 44 & 0.388515 & 0.681994 & 0.481448 & 1.416547 & 0.550350 \\
+A106000 & 46 & 0.378778 & 0.446673 & 1.475461 & 0.302735 & 0.114669 \\
+A160000 & 48 & 0.364132 & 0.618853 & 0.564793 & 1.095716 & 0.398986 \\
+A417000 & 40 & 0.354812 & 0.552384 & 0.537491 & 1.027710 & 0.364644 \\
+A988000 & 48 & 0.352375 & 0.525502 & 0.518943 & 1.012639 & 0.356828 \\
+A228000 & 45 & 0.332781 & 0.424026 & 1.820645 & 0.232899 & 0.077504 \\
+A577000 & 46 & 0.331839 & 0.596285 & 0.414725 & 1.437784 & 0.477113 \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{twfe-heterogeneity-table-top-15-households}{%
+\subsubsection{TWFE heterogeneity table (top 15
+households)}\label{twfe-heterogeneity-table-top-15-households}}
+
+\begin{longtable}[]{@{}lllllll@{}}
+\toprule
+personid & T\_i & corr & sd\_y & sd\_x & sd\_ratio & beta \\
+\midrule
+\endhead
+A963000 & 48 & 0.270483 & 0.458631 & 0.214467 & 2.138473 & 0.578420 \\
+A803000 & 49 & 0.264065 & 0.316578 & 0.133697 & 2.367875 & 0.625274 \\
+A939000 & 50 & 0.255064 & 0.374256 & 0.251831 & 1.486139 & 0.379060 \\
+A632000 & 48 & 0.231929 & 0.413671 & 0.229639 & 1.801395 & 0.417795 \\
+A859000 & 48 & 0.226349 & 0.381332 & 0.190292 & 2.003933 & 0.453587 \\
+A633000 & 50 & 0.219752 & 0.353331 & 0.336027 & 1.051497 & 0.231069 \\
+A266000 & 49 & 0.218839 & 0.333143 & 0.104639 & 3.183735 & 0.696725 \\
+A401000 & 51 & 0.216054 & 0.376469 & 0.401410 & 0.937867 & 0.202630 \\
+A931000 & 49 & 0.215674 & 0.333057 & 0.402531 & 0.827409 & 0.178450 \\
+A417000 & 46 & 0.214949 & 0.420469 & 0.280954 & 1.496573 & 0.321686 \\
+A250000 & 47 & 0.207706 & 0.384815 & 0.201274 & 1.911899 & 0.397112 \\
+A820000 & 50 & 0.206220 & 0.389418 & 0.180982 & 2.151690 & 0.443722 \\
+A239000 & 47 & 0.205037 & 0.315982 & 0.687771 & 0.459430 & 0.094200 \\
+A024000 & 50 & 0.203571 & 0.406944 & 0.280416 & 1.451215 & 0.295426 \\
+A083000 & 48 & 0.202623 & 0.311964 & 0.110329 & 2.827565 & 0.572931 \\
+\bottomrule
+\end{longtable}
+
+\begin{itemize}
+\tightlist
+\item
+  FD diagnosis: positive correlation households = 288, negative
+  correlation households = 243, weak-correlation households = 469.
+\item
+  TWFE diagnosis: positive correlation households = 346, negative
+  correlation households = 196, weak-correlation households = 458.
+\end{itemize}
+
+The pooled effect is small partly because heterogeneity is large: some
+households show positive local comovement, others negative comovement.
+This is precisely why the template asks for household-level
+heterogeneity tables rather than relying only on pooled coefficients.
+Rolling-window plots for representative households are saved in
+\texttt{analysis\_outputs/fd\_rolling\_corr.png} and
+\texttt{analysis\_outputs/twfe\_rolling\_corr.png}.
+
+\hypertarget{panel-data-estimates}{%
+\subsection{11. Panel data estimates}\label{panel-data-estimates}}
+
+\begin{longtable}[]{@{}lllll@{}}
+\toprule
+model & n\_obs & coef\_rate\_gap & se\_rate\_gap & r\_squared \\
+\midrule
+\endhead
+between & 1000 & 0.020735 & 0.015261 & 0.175337 \\
+within & 48737 & 0.003618 & 0.001194 & 0.030725 \\
+mundlak & 48737 & 0.003629 & 0.001209 & 0.033640 \\
+twfe & 48737 & 0.000032 & 0.002686 & 0.039371 \\
+fd & 45668 & -0.005959 & 0.002360 & 0.092429 \\
+\bottomrule
+\end{longtable}
+
+Across between, within, Mundlak, TWFE and first-difference estimators,
+the coefficient on \texttt{rate\_gap} remains economically small in the
+synthetic sample. The between, within and Mundlak coefficients are
+slightly positive, the TWFE coefficient is essentially zero, and only
+the first-difference coefficient is negative. This is an important
+replication conclusion: the simplified public panel exercise does not
+recover a stable reduced-form sign comparable to the full
+confidential-data hazard specification.
+
+\hypertarget{dynamic-panel-anderson-hsiao-style-extension}{%
+\subsubsection{Dynamic panel / Anderson-Hsiao style
+extension}\label{dynamic-panel-anderson-hsiao-style-extension}}
+
+\hypertarget{univariate-statistics-for-dynamic-variables}{%
+\paragraph{Univariate statistics for dynamic
+variables}\label{univariate-statistics-for-dynamic-variables}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}@{}}
+\toprule
+variable & n & mean & median & sd & se & min & q1 & q3 & max & skew &
+kurtosis & std\_min & std\_max \\
+\midrule
+\endhead
+dy & 42799 & 0.001612 & 0.000000 & 0.509109 & 0.509109 & -1.000000 &
+0.000000 & 0.000000 & 1.000000 & 0.002718 & 3.858422 & -1.967383 &
+1.961050 \\
+dy\_l1 & 42799 & 0.001916 & 0.000000 & 0.506093 & 0.506093 & -1.000000 &
+0.000000 & 0.000000 & 1.000000 & 0.003424 & 3.904526 & -1.979708 &
+1.972137 \\
+dx & 42799 & 0.056031 & 0.005064 & 1.043341 & 1.043341 & -11.849085 &
+-0.242583 & 0.297063 & 12.431947 & 0.065063 & 40.629890 & -11.410566 &
+11.861809 \\
+dx\_l1 & 42799 & 0.058741 & 0.007574 & 1.036956 & 1.036956 & -11.849085
+& -0.229883 & 0.297836 & 12.431947 & -0.086836 & 41.130615 & -11.483440
+& 11.932235 \\
+y\_l2 & 42799 & 0.149419 & 0.000000 & 0.356506 & 0.356506 & 0.000000 &
+0.000000 & 0.000000 & 1.000000 & 1.966853 & 4.868598 & -0.419122 &
+2.385883 \\
+x\_l2 & 42799 & 3.991430 & 3.791079 & 1.298371 & 1.298371 & -8.181924 &
+3.406824 & 4.286574 & 7.303224 & -0.404210 & 10.995020 & -9.375866 &
+2.550730 \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{correlation-matrix-for-dynamic-variables-and-instruments}{%
+\paragraph{Correlation matrix for dynamic variables and
+instruments}\label{correlation-matrix-for-dynamic-variables-and-instruments}}
+
+\begin{longtable}[]{@{}lllllll@{}}
+\toprule
+index & dy & dy\_l1 & dx & dx\_l1 & y\_l2 & x\_l2 \\
+\midrule
+\endhead
+dy & 1.000000 & -0.503768 & -0.007410 & 0.000742 & 0.004208 &
+-0.004623 \\
+dy\_l1 & -0.503768 & 1.000000 & 0.006452 & -0.007216 & -0.706084 &
+-0.003264 \\
+dx & -0.007410 & 0.006452 & 1.000000 & -0.412148 & 0.004068 &
+-0.037537 \\
+dx\_l1 & 0.000742 & -0.007216 & -0.412148 & 1.000000 & 0.015926 &
+-0.336558 \\
+y\_l2 & 0.004208 & -0.706084 & 0.004068 & 0.015926 & 1.000000 &
+0.002562 \\
+x\_l2 & -0.004623 & -0.003264 & -0.037537 & -0.336558 & 0.002562 &
+1.000000 \\
+\bottomrule
+\end{longtable}
+
+\begin{itemize}
+\tightlist
+\item
+  ADF test on \texttt{ΔY}: statistic = -71.831, p-value = 0.0000
+\item
+  ADF test on \texttt{ΔX}: statistic = -26.107, p-value = 0.0000
+\end{itemize}
+
+These pooled ADF tests strongly suggest stationarity of the differenced
+series, which is the expected result after first differencing. The
+template asked for a panel unit-root test of our choice; in this local
+Python environment, the pooled ADF test is the feasible choice.
+
+\hypertarget{ols-dynamic-fd-regression}{%
+\paragraph{OLS dynamic FD regression}\label{ols-dynamic-fd-regression}}
+
+\begin{verbatim}
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                     dy   R-squared:                       0.364
+Model:                            OLS   Adj. R-squared:                  0.363
+Method:                 Least Squares   F-statistic:                     303.6
+Date:                Thu, 28 May 2026   Prob (F-statistic):               0.00
+Time:                        17:15:49   Log-Likelihood:                -22159.
+No. Observations:               42799   AIC:                         4.443e+04
+Df Residuals:                   42744   BIC:                         4.491e+04
+Df Model:                          54                                         
+Covariance Type:                  HC1                                         
+=====================================================================================
+                        coef    std err          z      P>|z|      [0.025      0.975]
+-------------------------------------------------------------------------------------
+const                 0.0666      0.007      9.777      0.000       0.053       0.080
+dx                   -0.0012      0.003     -0.475      0.635      -0.006       0.004
+d_balance_to_orig -2.153e-05   7.62e-06     -2.827      0.005   -3.65e-05    -6.6e-06
+d_loan_age_years     -0.2001      0.005    -43.880      0.000      -0.209      -0.191
+d_log_balance         0.0009      0.001      0.755      0.450      -0.001       0.003
+q_2012Q4              0.0118      0.011      1.078      0.281      -0.010       0.033
+q_2013Q1              0.3570      0.016     22.341      0.000       0.326       0.388
+q_2013Q2             -0.1538      0.017     -9.202      0.000      -0.187      -0.121
+q_2013Q3             -0.2152      0.017    -12.513      0.000      -0.249      -0.181
+q_2013Q4             -0.0598      0.016     -3.813      0.000      -0.090      -0.029
+q_2014Q1             -0.0584      0.015     -3.836      0.000      -0.088      -0.029
+q_2014Q2             -0.0513      0.015     -3.324      0.001      -0.082      -0.021
+q_2014Q3             -0.0390      0.015     -2.620      0.009      -0.068      -0.010
+q_2014Q4             -0.0405      0.015     -2.629      0.009      -0.071      -0.010
+q_2015Q1             -0.0599      0.016     -3.824      0.000      -0.091      -0.029
+q_2015Q2             -0.0661      0.016     -4.242      0.000      -0.097      -0.036
+q_2015Q3             -0.0399      0.016     -2.516      0.012      -0.071      -0.009
+q_2015Q4             -0.0718      0.015     -4.705      0.000      -0.102      -0.042
+q_2016Q1             -0.0856      0.016     -5.501      0.000      -0.116      -0.055
+q_2016Q2             -0.0692      0.015     -4.478      0.000      -0.099      -0.039
+q_2016Q3             -0.0667      0.015     -4.433      0.000      -0.096      -0.037
+q_2016Q4             -0.0633      0.015     -4.204      0.000      -0.093      -0.034
+q_2017Q1             -0.0462      0.016     -2.982      0.003      -0.077      -0.016
+q_2017Q2             -0.0521      0.016     -3.244      0.001      -0.084      -0.021
+q_2017Q3             -0.0744      0.016     -4.757      0.000      -0.105      -0.044
+q_2017Q4             -0.0686      0.015     -4.442      0.000      -0.099      -0.038
+q_2018Q1             -0.0620      0.015     -4.130      0.000      -0.091      -0.033
+q_2018Q2             -0.0815      0.016     -5.164      0.000      -0.112      -0.051
+q_2018Q3             -0.0957      0.015     -6.273      0.000      -0.126      -0.066
+q_2018Q4             -0.0455      0.016     -2.897      0.004      -0.076      -0.015
+q_2019Q1             -0.0469      0.016     -2.984      0.003      -0.078      -0.016
+q_2019Q2             -0.0648      0.015     -4.239      0.000      -0.095      -0.035
+q_2019Q3             -0.0764      0.015     -5.056      0.000      -0.106      -0.047
+q_2019Q4             -0.0628      0.015     -4.237      0.000      -0.092      -0.034
+q_2020Q1             -0.0803      0.015     -5.502      0.000      -0.109      -0.052
+q_2020Q2             -0.0523      0.015     -3.469      0.001      -0.082      -0.023
+q_2020Q3             -0.0486      0.016     -3.097      0.002      -0.079      -0.018
+q_2020Q4             -0.0783      0.015     -5.056      0.000      -0.109      -0.048
+q_2021Q1             -0.0497      0.016     -3.042      0.002      -0.082      -0.018
+q_2021Q2             -0.0748      0.015     -4.844      0.000      -0.105      -0.045
+q_2021Q3             -0.0811      0.015     -5.351      0.000      -0.111      -0.051
+q_2021Q4             -0.0623      0.016     -4.017      0.000      -0.093      -0.032
+q_2022Q1             -0.0631      0.016     -3.997      0.000      -0.094      -0.032
+q_2022Q2             -0.0427      0.017     -2.547      0.011      -0.076      -0.010
+q_2022Q3             -0.0642      0.016     -3.985      0.000      -0.096      -0.033
+q_2022Q4             -0.0915      0.016     -5.612      0.000      -0.123      -0.060
+q_2023Q1             -0.0833      0.016     -5.158      0.000      -0.115      -0.052
+q_2023Q2             -0.0725      0.015     -4.883      0.000      -0.102      -0.043
+q_2023Q3             -0.0728      0.015     -4.780      0.000      -0.103      -0.043
+q_2023Q4             -0.0503      0.015     -3.300      0.001      -0.080      -0.020
+q_2024Q1             -0.0542      0.015     -3.552      0.000      -0.084      -0.024
+q_2024Q2             -0.0691      0.016     -4.445      0.000      -0.100      -0.039
+q_2024Q3             -0.0637      0.016     -3.999      0.000      -0.095      -0.032
+dy_l1                -0.5075      0.005   -112.051      0.000      -0.516      -0.499
+dx_l1                 0.0004      0.002      0.187      0.851      -0.004       0.005
+==============================================================================
+Omnibus:                     2923.603   Durbin-Watson:                   2.272
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             5065.037
+Skew:                           0.520   Prob(JB):                         0.00
+Kurtosis:                       4.326   Cond. No.                     1.29e+04
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+[2] The condition number is large, 1.29e+04. This might indicate that there are
+strong multicollinearity or other numerical problems.
+\end{verbatim}
+
+\hypertarget{iv-dynamic-fd-regression-levels-instruments-y_t-2-and-x_t-2}{%
+\paragraph{\texorpdfstring{IV dynamic FD regression (levels instruments
+\texttt{Y\_\{t-2\}} and
+\texttt{X\_\{t-2\}})}{IV dynamic FD regression (levels instruments Y\_\{t-2\} and X\_\{t-2\})}}\label{iv-dynamic-fd-regression-levels-instruments-y_t-2-and-x_t-2}}
+
+\begin{verbatim}
+                          IV2SLS Regression Results                           
+==============================================================================
+Dep. Variable:                     dy   R-squared:                       0.143
+Model:                         IV2SLS   Adj. R-squared:                  0.142
+Method:                     Two Stage   F-statistic:                     106.7
+                        Least Squares   Prob (F-statistic):               0.00
+Date:                Thu, 28 May 2026                                         
+Time:                        17:15:49                                         
+No. Observations:               42799                                         
+Df Residuals:                   42744                                         
+Df Model:                          54                                         
+=====================================================================================
+                        coef    std err          t      P>|t|      [0.025      0.975]
+-------------------------------------------------------------------------------------
+const                 0.0533      0.016      3.340      0.001       0.022       0.085
+dx                   -0.0031      0.003     -0.982      0.326      -0.009       0.003
+d_balance_to_orig -2.449e-05   8.78e-06     -2.788      0.005   -4.17e-05   -7.27e-06
+d_loan_age_years     -0.2012      0.003    -67.917      0.000      -0.207      -0.195
+d_log_balance         0.0014      0.001      1.061      0.289      -0.001       0.004
+q_2012Q4              0.0209      0.023      0.927      0.354      -0.023       0.065
+q_2013Q1              0.3560      0.022     15.832      0.000       0.312       0.400
+q_2013Q2             -0.3367      0.023    -14.827      0.000      -0.381      -0.292
+q_2013Q3             -0.0442      0.023     -1.918      0.055      -0.089       0.001
+q_2013Q4             -0.0466      0.023     -2.044      0.041      -0.091      -0.002
+q_2014Q1             -0.0325      0.023     -1.441      0.150      -0.077       0.012
+q_2014Q2             -0.0395      0.022     -1.757      0.079      -0.084       0.005
+q_2014Q3             -0.0248      0.022     -1.103      0.270      -0.069       0.019
+q_2014Q4             -0.0331      0.023     -1.469      0.142      -0.077       0.011
+q_2015Q1             -0.0509      0.023     -2.259      0.024      -0.095      -0.007
+q_2015Q2             -0.0445      0.023     -1.973      0.048      -0.089      -0.000
+q_2015Q3             -0.0241      0.023     -1.071      0.284      -0.068       0.020
+q_2015Q4             -0.0703      0.022     -3.125      0.002      -0.114      -0.026
+q_2016Q1             -0.0626      0.023     -2.780      0.005      -0.107      -0.018
+q_2016Q2             -0.0507      0.023     -2.251      0.024      -0.095      -0.007
+q_2016Q3             -0.0515      0.022     -2.291      0.022      -0.095      -0.007
+q_2016Q4             -0.0467      0.023     -2.071      0.038      -0.091      -0.002
+q_2017Q1             -0.0372      0.023     -1.642      0.101      -0.082       0.007
+q_2017Q2             -0.0473      0.023     -2.091      0.037      -0.092      -0.003
+q_2017Q3             -0.0622      0.023     -2.761      0.006      -0.106      -0.018
+q_2017Q4             -0.0494      0.023     -2.187      0.029      -0.094      -0.005
+q_2018Q1             -0.0490      0.023     -2.170      0.030      -0.093      -0.005
+q_2018Q2             -0.0689      0.023     -3.042      0.002      -0.113      -0.025
+q_2018Q3             -0.0806      0.023     -3.549      0.000      -0.125      -0.036
+q_2018Q4             -0.0215      0.023     -0.943      0.346      -0.066       0.023
+q_2019Q1             -0.0429      0.023     -1.893      0.058      -0.087       0.002
+q_2019Q2             -0.0539      0.023     -2.385      0.017      -0.098      -0.010
+q_2019Q3             -0.0639      0.023     -2.828      0.005      -0.108      -0.020
+q_2019Q4             -0.0400      0.023     -1.772      0.076      -0.084       0.004
+q_2020Q1             -0.0639      0.023     -2.829      0.005      -0.108      -0.020
+q_2020Q2             -0.0286      0.023     -1.261      0.207      -0.073       0.016
+q_2020Q3             -0.0480      0.023     -2.123      0.034      -0.092      -0.004
+q_2020Q4             -0.0602      0.023     -2.667      0.008      -0.105      -0.016
+q_2021Q1             -0.0372      0.023     -1.651      0.099      -0.081       0.007
+q_2021Q2             -0.0724      0.023     -3.207      0.001      -0.117      -0.028
+q_2021Q3             -0.0548      0.023     -2.428      0.015      -0.099      -0.011
+q_2021Q4             -0.0407      0.023     -1.799      0.072      -0.085       0.004
+q_2022Q1             -0.0533      0.023     -2.310      0.021      -0.098      -0.008
+q_2022Q2             -0.0281      0.024     -1.182      0.237      -0.075       0.019
+q_2022Q3             -0.0688      0.024     -2.910      0.004      -0.115      -0.022
+q_2022Q4             -0.0790      0.023     -3.419      0.001      -0.124      -0.034
+q_2023Q1             -0.0615      0.023     -2.673      0.008      -0.107      -0.016
+q_2023Q2             -0.0591      0.023     -2.613      0.009      -0.103      -0.015
+q_2023Q3             -0.0507      0.023     -2.225      0.026      -0.095      -0.006
+q_2023Q4             -0.0440      0.023     -1.931      0.054      -0.089       0.001
+q_2024Q1             -0.0446      0.023     -1.973      0.048      -0.089      -0.000
+q_2024Q2             -0.0631      0.023     -2.790      0.005      -0.107      -0.019
+q_2024Q3             -0.0416      0.023     -1.839      0.066      -0.086       0.003
+dy_l1                -0.0290      0.006     -4.501      0.000      -0.042      -0.016
+dx_l1                 0.0041      0.003      1.213      0.225      -0.003       0.011
+==============================================================================
+Omnibus:                     1304.124   Durbin-Watson:                   2.863
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             2769.515
+Skew:                          -0.193   Prob(JB):                         0.00
+Kurtosis:                       4.185   Cond. No.                     1.29e+04
+==============================================================================
+\end{verbatim}
+
+\hypertarget{first-stage-regressions}{%
+\paragraph{First-stage regressions}\label{first-stage-regressions}}
+
+\begin{itemize}
+\tightlist
+\item
+  First stage for \texttt{ΔY\_(t-1)}: R² = 0.5117
+\item
+  First stage for \texttt{ΔX\_(t-1)}: R² = 0.7811
+\end{itemize}
+
+The first-stage R² values are not especially low in this simplified
+setup, so there is no immediate weak-instrument warning from that
+diagnostic alone. Even so, the dynamic IV exercise should still be read
+as a pedagogical robustness check rather than a definitive causal
+estimate, because the public synthetic panel is not the authors' full
+hazard dataset.
+
+\hypertarget{impulse-response-and-long-run-coefficient}{%
+\paragraph{Impulse response and long-run
+coefficient}\label{impulse-response-and-long-run-coefficient}}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+horizon & response \\
+\midrule
+\endhead
+1.000000 & -0.001236 \\
+2.000000 & 0.001074 \\
+3.000000 & -0.000545 \\
+4.000000 & 0.000276 \\
+\bottomrule
+\end{longtable}
+
+\begin{itemize}
+\tightlist
+\item
+  Long-run coefficient: -0.000524
+\end{itemize}
+
+\hypertarget{optional-time-invariant-variable-estimators}{%
+\subsection{12. Optional time-invariant-variable
+estimators}\label{optional-time-invariant-variable-estimators}}
+
+Skipped. In the selected working set for this homework, I did not keep a
+substantively meaningful time-invariant household characteristic that
+could justify a Hausman-Taylor exercise. Forcing an artificial
+time-invariant regressor would not improve the econometric quality of
+the homework. This is preferable to running a mechanical but
+uninformative Hausman-Taylor specification.
+
+\hypertarget{own-estimations-not-done-in-the-paper}{%
+\subsection{13. Own estimations not done in the
+paper}\label{own-estimations-not-done-in-the-paper}}
+
+As an original extension, I estimated a TWFE-style interaction model
+allowing the effect of the rate gap to differ for households above the
+median balance-to-original-loan ratio. This is a simple way to test
+whether rate lock is more visible among relatively high-balance
+households.
+
+\begin{verbatim}
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:              move_flag   R-squared:                       0.041
+Model:                            OLS   Adj. R-squared:                  0.041
+Method:                 Least Squares   F-statistic:                     364.8
+Date:                Thu, 28 May 2026   Prob (F-statistic):               0.00
+Time:                        17:15:49   Log-Likelihood:                -16506.
+No. Observations:               48737   AIC:                         3.302e+04
+Df Residuals:                   48731   BIC:                         3.308e+04
+Df Model:                           5                                         
+Covariance Type:                  HC1                                         
+=========================================================================================
+                            coef    std err          z      P>|z|      [0.025      0.975]
+-----------------------------------------------------------------------------------------
+const                    -0.0094      0.002     -5.166      0.000      -0.013      -0.006
+rate_gap                 -0.0008      0.003     -0.313      0.754      -0.006       0.004
+rate_gap_high_balance     0.1110      0.014      8.134      0.000       0.084       0.138
+balance_to_orig       -1.436e-05   4.83e-06     -2.974      0.003   -2.38e-05    -4.9e-06
+loan_age_years           -0.0531      0.001    -42.027      0.000      -0.056      -0.051
+log_balance              -0.0041      0.001     -2.812      0.005      -0.007      -0.001
+==============================================================================
+Omnibus:                    14226.333   Durbin-Watson:                   2.037
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):            30955.793
+Skew:                           1.760   Prob(JB):                         0.00
+Kurtosis:                       4.690   Cond. No.                     1.77e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+[2] The condition number is large, 1.77e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+\end{verbatim}
+
+The interaction term should be interpreted cautiously, but it offers a
+clean example of an original panel-data extension beyond the baseline
+replication workflow.
+
+\hypertarget{list-of-references-cited-in-the-text}{%
+\subsection{14. List of references cited in the
+text}\label{list-of-references-cited-in-the-text}}
+
+\begin{itemize}
+\tightlist
+\item
+  Liebersohn, J., \& Rothstein, J. (2025). \emph{Household mobility and
+  mortgage rate lock}. \emph{Journal of Financial Economics}.
+  https://doi.org/10.1016/j.jfineco.2024.103973
+\item
+  Freddie Mac / Federal Reserve Bank of St.~Louis.
+  \texttt{MORTGAGE30US}, 30-Year Fixed Rate Mortgage Average in the
+  United States. https://fred.stlouisfed.org/series/MORTGAGE30US
+\item
+  Mendeley Data replication package:
+  https://doi.org/10.17632/74sfv9kx9n.1
+\item
+  Replication Package README included locally in the project folder.
+\end{itemize}
+
+\hypertarget{appendix-to-do-list-for-the-next-panel-data-study}{%
+\subsection{Appendix: To-do list for the next panel-data
+study}\label{appendix-to-do-list-for-the-next-panel-data-study}}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Define the economic question and the exact identifying variation
+  before coding.
+\item[$\square$]
+  List the original paper's preferred dependent variable, key
+  explanatory variable, controls, and fixed effects.
+\item[$\square$]
+  Verify raw data provenance and save permanent source links
+  immediately.
+\item[$\square$]
+  Document every cleaning choice and every sample restriction in a
+  reproducible script.
+\item[$\square$]
+  Check panel identifiers and time identifiers before any merge.
+\item[$\square$]
+  Count duplicates by individual-time cell before estimating anything.
+\item[$\square$]
+  Inspect missing values separately for dependent and explanatory
+  variables.
+\item[$\square$]
+  Create the dynamic-panel benchmark sample with at least three
+  consecutive observations.
+\item[$\square$]
+  Report attrition, holes, and sample-selection bias before regressions.
+\item[$\square$]
+  Compute between, within, FD and TWFE transformations early and compare
+  their distributions.
+\item[$\square$]
+  Sort variables by within-variance share to understand which estimators
+  are informative.
+\item[$\square$]
+  Check lags and first differences manually on the first stacked
+  observations.
+\item[$\square$]
+  Inspect heterogeneity by individuals before relying on pooled
+  coefficients.
+\item[$\square$]
+  Test robustness with alternative functional forms and subgroup
+  interactions.
+\item[$\square$]
+  Assess instrument strength explicitly before reporting IV results.
+\item[$\square$]
+  Write interpretation in plain language after every table, not only
+  code comments.
+\item[$\square$]
+  Keep an ordered folder of outputs: data, tables, figures, report,
+  prompts.
+\item[$\square$]
+  Export final tables in both machine-readable and human-readable
+  formats.
+\item[$\square$]
+  State clearly what is replicated exactly and what is only
+  approximated.
+\item[$\square$]
+  Finish with a limitations paragraph and a short agenda for future
+  work.
+\end{itemize}
