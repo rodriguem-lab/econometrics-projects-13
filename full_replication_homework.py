@@ -812,7 +812,7 @@ def write_report(panel, stats, var_decomp, time_varying, time_invariant, individ
             "Test robustness with alternative functional forms and subgroup interactions.",
             "Assess instrument strength explicitly before reporting IV results.",
             "Write interpretation in plain language after every table, not only code comments.",
-            "Keep an ordered folder of outputs: data, tables, figures, report, prompts.",
+            "Keep an ordered folder of outputs: data, tables, figures, report, and work notes.",
             "Export final tables in both machine-readable and human-readable formats.",
             "State clearly what is replicated exactly and what is only approximated.",
             "Finish with a limitations paragraph and a short agenda for future work.",

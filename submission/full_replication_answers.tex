@@ -1,3 +1,83 @@
+\documentclass[a4paper,11pt]{article}
+
+% ---------- Page and typography ----------
+\usepackage[a4paper,left=1.25cm,right=1.25cm,top=1.65cm,bottom=1.75cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xurl}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{calc}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{amssymb}
+\usepackage{ragged2e}
+\usepackage{textcomp}
+\usepackage{adjustbox}
+\renewcommand{\_}{\textunderscore\allowbreak}
+
+% ---------- General layout ----------
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlength{\emergencystretch}{5em}
+\sloppy
+\justifying
+
+% Lists: compact but readable
+\setlist[itemize]{leftmargin=1.1cm,itemsep=0.12em,topsep=0.2em}
+\setlist[enumerate]{leftmargin=1.1cm,itemsep=0.12em,topsep=0.2em}
+
+% Tables: clean, centered, readable. No random landscape pages.
+\setlength{\tabcolsep}{3.2pt}
+\renewcommand{\arraystretch}{1.25}
+\captionsetup{justification=centering,singlelinecheck=false}
+
+% Pandoc compatibility
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Center all longtables and keep readable spacing. Wide tables use smaller text,
+% but are not squeezed into unreadable tiny text.
+\let\oldlongtable\longtable
+\let\endoldlongtable\endlongtable
+\renewenvironment{longtable}{%
+  \begingroup\centering\scriptsize
+  \setlength{\tabcolsep}{2.4pt}%
+  \renewcommand{\arraystretch}{1.28}%
+  \oldlongtable%
+}{%
+  \endoldlongtable\endgroup%
+}
+
+% Regression outputs in verbatim blocks: compact but readable
+\makeatletter
+\def\verbatim{\footnotesize\@verbatim \frenchspacing\@vobeyspaces \@xverbatim}
+\makeatother
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue,
+  citecolor=black
+}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries Econometrics}\par
+    \vspace{0.6cm}
+    {\large Rodrigue Mieuzet}\par
+    {\large Nam Khanh NGUYEN}\par
+    \vspace{0.35cm}
+    {June 2026}\par
+\end{center}
+\vspace{0.5cm}
+
 \hypertarget{panel-data-econometrics-homework-partial-replication}{%
 \section{Panel Data Econometrics Homework: Partial
 Replication}\label{panel-data-econometrics-homework-partial-replication}}
@@ -5,7 +85,7 @@ Replication}\label{panel-data-econometrics-homework-partial-replication}}
 \hypertarget{name-of-student}{%
 \subsection{Name of student}\label{name-of-student}}
 
-To fill in.
+Rodrigue Mieuzet and Nam Khanh NGUYEN.
 
 \hypertarget{identification-of-the-replicated-paper}{%
 \subsection{1. Identification of the replicated
@@ -157,13 +237,18 @@ used in the paper.
 \subsubsection{Table 3: Data
 characteristics}\label{table-3-data-characteristics}}
 
-\begin{longtable}[]{@{}
+\begin{center}
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.50}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.50}}@{}}
 \toprule
 Item & Value \\
 \midrule
-\endhead
 Maximal time span & 2012Q1 to 2024Q3 \\
 Frequency & Quarterly \\
 Number of individuals & Ntotal = 1000 \\
@@ -172,7 +257,10 @@ Balanced or unbalanced panel & Balanced \\
 Update & FRED mortgage rates updated beyond the local 2023-06-08 cutoff
 so that market-rate coverage matches the panel through 2024Q3 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
 
 \hypertarget{panel-data-sample-selection}{%
 \subsection{5. Panel data sample
@@ -222,77 +310,43 @@ still reported, but they mechanically show no attrition and no holes.
 \subsubsection{Number of individuals per
 date}\label{number-of-individuals-per-date}}
 
-\begin{longtable}[]{@{}ll@{}}
+\begin{center}
+\begingroup
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrrrrrrrrr}
 \toprule
-quarter & N \\
+Year & 2012 & 2013 & 2014 & 2015 & 2016 & 2017 & 2018 & 2019 & 2020 & 2021 & 2022 & 2023 & 2024 \\
 \midrule
-\endhead
-2012Q1 & 1000 \\
-2012Q2 & 1000 \\
-2012Q3 & 1000 \\
-2012Q4 & 1000 \\
-2013Q1 & 1000 \\
-2013Q2 & 1000 \\
-2013Q3 & 1000 \\
-2013Q4 & 1000 \\
-2014Q1 & 1000 \\
-2014Q2 & 1000 \\
-2014Q3 & 1000 \\
-2014Q4 & 1000 \\
-2015Q1 & 1000 \\
-2015Q2 & 1000 \\
-2015Q3 & 1000 \\
-2015Q4 & 1000 \\
-2016Q1 & 1000 \\
-2016Q2 & 1000 \\
-2016Q3 & 1000 \\
-2016Q4 & 1000 \\
-2017Q1 & 1000 \\
-2017Q2 & 1000 \\
-2017Q3 & 1000 \\
-2017Q4 & 1000 \\
-2018Q1 & 1000 \\
-2018Q2 & 1000 \\
-2018Q3 & 1000 \\
-2018Q4 & 1000 \\
-2019Q1 & 1000 \\
-2019Q2 & 1000 \\
-2019Q3 & 1000 \\
-2019Q4 & 1000 \\
-2020Q1 & 1000 \\
-2020Q2 & 1000 \\
-2020Q3 & 1000 \\
-2020Q4 & 1000 \\
-2021Q1 & 1000 \\
-2021Q2 & 1000 \\
-2021Q3 & 1000 \\
-2021Q4 & 1000 \\
-2022Q1 & 1000 \\
-2022Q2 & 1000 \\
-2022Q3 & 1000 \\
-2022Q4 & 1000 \\
-2023Q1 & 1000 \\
-2023Q2 & 1000 \\
-2023Q3 & 1000 \\
-2023Q4 & 1000 \\
-2024Q1 & 1000 \\
-2024Q2 & 1000 \\
-2024Q3 & 1000 \\
+Number of individuals & 1000 & 1000 & 1000 & 1000 & 1000 & 1000 & 1000 & 1000 & 1000 & 1000 & 1000 & 1000 & 1000 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
 
 \hypertarget{number-of-individuals-with-the-same-number-of-temporal-observations}{%
 \subsubsection{Number of individuals with the same number of temporal
 observations}\label{number-of-individuals-with-the-same-number-of-temporal-observations}}
 
-\begin{longtable}[]{@{}ll@{}}
+\begin{center}
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lr@{}}
 \toprule
 quarter & number\_of\_individuals \\
 \midrule
-\endhead
 51 & 1000 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
 
 \begin{itemize}
 \tightlist
@@ -340,20 +394,17 @@ categories}\label{table-4-variable-count-by-categories}}
 \subsubsection{Table 5: Time-varying variables sorted by within
 share}\label{table-5-time-varying-variables-sorted-by-within-share}}
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}@{}}
+\begin{center}
+\begingroup
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lrrrrrrr@{}}
 \toprule
 variable & N & NT & NT\_over\_N & overall\_var & between\_var &
 within\_var & within\_share \\
 \midrule
-\endhead
 rate\_gap & 1000 & 48737 & 48.737000 & 1.889807 & 0.011398 & 1.919089 &
 1.015495 \\
 mortgage\_rate\_annual & 1000 & 48737 & 48.737000 & 0.456431 & 0.010072
@@ -367,7 +418,11 @@ balance\_to\_orig & 1000 & 51000 & 51.000000 & 44131.307643 &
 loan\_age\_years & 1000 & 51000 & 51.000000 & 2.393774 & 0.510415 &
 1.921499 & 0.802707 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
+
 
 \hypertarget{time-invariant-variables-100-between-variance}{%
 \subsubsection{Time-invariant variables (100\% between
@@ -379,18 +434,27 @@ None in the selected set.
 \subsubsection{Individual-invariant variables (0\% between
 variance)}\label{individual-invariant-variables-0-between-variance}}
 
-\begin{longtable}[]{@{}llllllll@{}}
+\begin{center}
+\begingroup
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lrrrrrrr@{}}
 \toprule
 variable & N & NT & NT\_over\_N & overall\_var & between\_var &
 within\_var & within\_share \\
 \midrule
-\endhead
 market\_rate & 1000 & 51000 & 51.000000 & 1.427681 & 0.000000 & 1.456206
 & 1.019980 \\
 trend & 1000 & 51000 & 51.000000 & 216.670915 & 0.000000 & 221.000000 &
 1.019980 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
+
 
 \textbf{Comment.} The key dependent variable \texttt{move\_flag} and the
 key explanatory variable \texttt{rate\_gap} both have very high within
@@ -410,26 +474,17 @@ decomposition}\label{between-plus-one-way-within-decomposition}}
 variable
 \texttt{move\_flag}}{Descriptive statistics for the dependent variable move\_flag}}\label{descriptive-statistics-for-the-dependent-variable-move_flag}}
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}@{}}
+\begin{center}
+\begingroup
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lrrrrrrrrrrrrr@{}}
 \toprule
 transform & n & mean & median & sd & se & min & q1 & q3 & max & skew &
 kurtosis & std\_min & std\_max \\
 \midrule
-\endhead
 between & 51000 & 0.147569 & 0.137255 & 0.049571 & 0.049571 & 0.019608 &
 0.117647 & 0.176471 & 0.333333 & 0.387867 & 3.335060 & -2.581353 &
 3.747432 \\
@@ -443,33 +498,28 @@ twfe & 51000 & 0.000000 & -0.128686 & 0.346629 & 0.346629 & -0.614549 &
 -0.171902 & -0.074863 & 1.070353 & 1.874439 & 4.867251 & -1.772930 &
 3.087892 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
+
 
 \hypertarget{descriptive-statistics-for-the-preferred-explanatory-variable-rate_gap}{%
 \subsubsection{\texorpdfstring{Descriptive statistics for the preferred
 explanatory variable
 \texttt{rate\_gap}}{Descriptive statistics for the preferred explanatory variable rate\_gap}}\label{descriptive-statistics-for-the-preferred-explanatory-variable-rate_gap}}
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}@{}}
+\begin{center}
+\begingroup
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lrrrrrrrrrrrrr@{}}
 \toprule
 transform & n & mean & median & sd & se & min & q1 & q3 & max & skew &
 kurtosis & std\_min & std\_max \\
 \midrule
-\endhead
 between & 51000 & 4.092290 & 4.114000 & 0.106710 & 0.106710 & 3.576468 &
 4.037769 & 4.168272 & 4.290295 & -1.112028 & 4.861055 & -4.833877 &
 1.855547 \\
@@ -483,7 +533,11 @@ twfe & 48737 & -0.000000 & 0.110874 & 0.668686 & 0.668686 & -11.335833 &
 0.015642 & 0.199821 & 0.795920 & -8.586655 & 100.252310 & -16.952390 &
 1.190274 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
+
 
 The within-transformed mobility indicator is highly non-normal and
 discrete, with many observations concentrated near household means. The
@@ -513,19 +567,18 @@ first differences rather than cross-household subtraction.
 \subsubsection{Between vs within correlation
 matrix}\label{between-vs-within-correlation-matrix}}
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}@{}}
+\begin{center}
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lrrrrr@{}}
 \toprule
 index & move\_flag\_between & rate\_gap\_between &
 balance\_to\_orig\_between & loan\_age\_years\_between &
 log\_balance\_between \\
 \midrule
-\endhead
 move\_flag\_between & 1.000000 & 0.052314 & 0.004630 & -0.416690 &
 0.001786 \\
 rate\_gap\_between & 0.052314 & 1.000000 & -0.003660 & -0.028802 &
@@ -537,22 +590,23 @@ loan\_age\_years\_between & -0.416690 & -0.028802 & -0.001591 & 1.000000
 log\_balance\_between & 0.001786 & 0.473497 & -0.083276 & 0.024215 &
 1.000000 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.14}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.14}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.14}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.14}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.14}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.14}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.14}}@{}}
+\begin{center}
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lrrrrrr@{}}
 \toprule
 index & move\_flag\_within & rate\_gap\_within &
 balance\_to\_orig\_within & loan\_age\_years\_within &
 log\_balance\_within & trend\_within \\
 \midrule
-\endhead
 move\_flag\_within & 1.000000 & 0.004038 & -0.007428 & -0.174514 &
 0.004541 & 0.014490 \\
 rate\_gap\_within & 0.004038 & 1.000000 & -0.002453 & 0.057984 &
@@ -566,24 +620,27 @@ log\_balance\_within & 0.004541 & 0.243703 & 0.022447 & -0.005559 &
 trend\_within & 0.014490 & 0.466081 & -0.004764 & 0.252264 & 0.000096 &
 1.000000 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
+
 
 \hypertarget{twfe-vs-fd-correlation-matrix}{%
 \subsubsection{TWFE vs FD correlation
 matrix}\label{twfe-vs-fd-correlation-matrix}}
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.17}}@{}}
+\begin{center}
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lrrrrr@{}}
 \toprule
 index & move\_flag\_twfe & rate\_gap\_twfe & balance\_to\_orig\_twfe &
 loan\_age\_years\_twfe & log\_balance\_twfe \\
 \midrule
-\endhead
 move\_flag\_twfe & 1.000000 & 0.001892 & -0.007375 & -0.198220 &
 0.004439 \\
 rate\_gap\_twfe & 0.001892 & 1.000000 & 0.006838 & -0.000247 &
@@ -595,23 +652,23 @@ loan\_age\_years\_twfe & -0.198220 & -0.000247 & -0.003654 & 1.000000 &
 log\_balance\_twfe & 0.004439 & 0.482349 & 0.022366 & -0.003955 &
 1.000000 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.12}}@{}}
+\begin{center}
+\begingroup
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lrrrrrrr@{}}
 \toprule
 index & move\_flag\_fd & rate\_gap\_fd & balance\_to\_orig\_fd &
 loan\_age\_years\_fd & log\_balance\_fd & move\_flag\_fd\_lag1 &
 rate\_gap\_fd\_lag1 \\
 \midrule
-\endhead
 move\_flag\_fd & 1.000000 & -0.007410 & -0.014307 & -0.305840 & 0.001279
 & -0.503768 & 0.000742 \\
 rate\_gap\_fd & -0.007410 & 1.000000 & 0.006575 & -0.006187 & 0.450417 &
@@ -627,7 +684,11 @@ move\_flag\_fd\_lag1 & -0.503768 & 0.006452 & 0.002737 & 0.005156 &
 rate\_gap\_fd\_lag1 & 0.000742 & -0.412148 & -0.001369 & -0.007473 &
 -0.230097 & -0.007216 & 1.000000 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
+
 
 The simple correlations between transformed mobility and transformed
 rate-gap variables remain weak in absolute value, usually below 0.1,
@@ -645,11 +706,16 @@ FD}\label{investigating-bivariate-heterogeneity-by-individuals-for-twfe-and-fd}}
 \subsubsection{FD heterogeneity table (top 15
 households)}\label{fd-heterogeneity-table-top-15-households}}
 
-\begin{longtable}[]{@{}lllllll@{}}
+\begin{center}
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lrrrrrr@{}}
 \toprule
 personid & T\_i & corr & sd\_y & sd\_x & sd\_ratio & beta \\
 \midrule
-\endhead
 A865000 & 48 & 0.487346 & 0.291730 & 0.716015 & 0.407436 & 0.198562 \\
 A114000 & 46 & 0.457269 & 0.493924 & 2.083628 & 0.237050 & 0.108396 \\
 A749000 & 46 & 0.433213 & 0.446673 & 1.092391 & 0.408895 & 0.177139 \\
@@ -666,17 +732,26 @@ A988000 & 48 & 0.352375 & 0.525502 & 0.518943 & 1.012639 & 0.356828 \\
 A228000 & 45 & 0.332781 & 0.424026 & 1.820645 & 0.232899 & 0.077504 \\
 A577000 & 46 & 0.331839 & 0.596285 & 0.414725 & 1.437784 & 0.477113 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
+
 
 \hypertarget{twfe-heterogeneity-table-top-15-households}{%
 \subsubsection{TWFE heterogeneity table (top 15
 households)}\label{twfe-heterogeneity-table-top-15-households}}
 
-\begin{longtable}[]{@{}lllllll@{}}
+\begin{center}
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lrrrrrr@{}}
 \toprule
 personid & T\_i & corr & sd\_y & sd\_x & sd\_ratio & beta \\
 \midrule
-\endhead
 A963000 & 48 & 0.270483 & 0.458631 & 0.214467 & 2.138473 & 0.578420 \\
 A803000 & 49 & 0.264065 & 0.316578 & 0.133697 & 2.367875 & 0.625274 \\
 A939000 & 50 & 0.255064 & 0.374256 & 0.251831 & 1.486139 & 0.379060 \\
@@ -693,7 +768,11 @@ A239000 & 47 & 0.205037 & 0.315982 & 0.687771 & 0.459430 & 0.094200 \\
 A024000 & 50 & 0.203571 & 0.406944 & 0.280416 & 1.451215 & 0.295426 \\
 A083000 & 48 & 0.202623 & 0.311964 & 0.110329 & 2.827565 & 0.572931 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
+
 
 \begin{itemize}
 \tightlist
@@ -716,18 +795,26 @@ Rolling-window plots for representative households are saved in
 \hypertarget{panel-data-estimates}{%
 \subsection{11. Panel data estimates}\label{panel-data-estimates}}
 
-\begin{longtable}[]{@{}lllll@{}}
+\begin{center}
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lrrrr@{}}
 \toprule
 model & n\_obs & coef\_rate\_gap & se\_rate\_gap & r\_squared \\
 \midrule
-\endhead
 between & 1000 & 0.020735 & 0.015261 & 0.175337 \\
 within & 48737 & 0.003618 & 0.001194 & 0.030725 \\
 mundlak & 48737 & 0.003629 & 0.001209 & 0.033640 \\
 twfe & 48737 & 0.000032 & 0.002686 & 0.039371 \\
 fd & 45668 & -0.005959 & 0.002360 & 0.092429 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
 
 Across between, within, Mundlak, TWFE and first-difference estimators,
 the coefficient on \texttt{rate\_gap} remains economically small in the
@@ -746,26 +833,17 @@ extension}\label{dynamic-panel-anderson-hsiao-style-extension}}
 \paragraph{Univariate statistics for dynamic
 variables}\label{univariate-statistics-for-dynamic-variables}}
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.07}}@{}}
+\begin{center}
+\begingroup
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lrrrrrrrrrrrrr@{}}
 \toprule
 variable & n & mean & median & sd & se & min & q1 & q3 & max & skew &
 kurtosis & std\_min & std\_max \\
 \midrule
-\endhead
 dy & 42799 & 0.001612 & 0.000000 & 0.509109 & 0.509109 & -1.000000 &
 0.000000 & 0.000000 & 1.000000 & 0.002718 & 3.858422 & -1.967383 &
 1.961050 \\
@@ -785,17 +863,26 @@ x\_l2 & 42799 & 3.991430 & 3.791079 & 1.298371 & 1.298371 & -8.181924 &
 3.406824 & 4.286574 & 7.303224 & -0.404210 & 10.995020 & -9.375866 &
 2.550730 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
+
 
 \hypertarget{correlation-matrix-for-dynamic-variables-and-instruments}{%
 \paragraph{Correlation matrix for dynamic variables and
 instruments}\label{correlation-matrix-for-dynamic-variables-and-instruments}}
 
-\begin{longtable}[]{@{}lllllll@{}}
+\begin{center}
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lrrrrrr@{}}
 \toprule
 index & dy & dy\_l1 & dx & dx\_l1 & y\_l2 & x\_l2 \\
 \midrule
-\endhead
 dy & 1.000000 & -0.503768 & -0.007410 & 0.000742 & 0.004208 &
 -0.004623 \\
 dy\_l1 & -0.503768 & 1.000000 & 0.006452 & -0.007216 & -0.706084 &
@@ -809,14 +896,18 @@ y\_l2 & 0.004208 & -0.706084 & 0.004068 & 0.015926 & 1.000000 &
 x\_l2 & -0.004623 & -0.003264 & -0.037537 & -0.336558 & 0.002562 &
 1.000000 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
+
 
 \begin{itemize}
 \tightlist
 \item
-  ADF test on \texttt{ΔY}: statistic = -71.831, p-value = 0.0000
+  ADF test on $\Delta Y$: statistic = -71.831, p-value = 0.0000
 \item
-  ADF test on \texttt{ΔX}: statistic = -26.107, p-value = 0.0000
+  ADF test on $\Delta X$: statistic = -26.107, p-value = 0.0000
 \end{itemize}
 
 These pooled ADF tests strongly suggest stationarity of the differenced
@@ -999,12 +1090,12 @@ Kurtosis:                       4.185   Cond. No.                     1.29e+04
 \begin{itemize}
 \tightlist
 \item
-  First stage for \texttt{ΔY\_(t-1)}: R² = 0.5117
+  First stage for \texttt{$\Delta Y$\_(t-1)}: $R^2$ = 0.5117
 \item
-  First stage for \texttt{ΔX\_(t-1)}: R² = 0.7811
+  First stage for \texttt{$\Delta X$\_(t-1)}: $R^2$ = 0.7811
 \end{itemize}
 
-The first-stage R² values are not especially low in this simplified
+The first-stage $R^2$ values are not especially low in this simplified
 setup, so there is no immediate weak-instrument warning from that
 diagnostic alone. Even so, the dynamic IV exercise should still be read
 as a pedagogical robustness check rather than a definitive causal
@@ -1015,17 +1106,25 @@ hazard dataset.
 \paragraph{Impulse response and long-run
 coefficient}\label{impulse-response-and-long-run-coefficient}}
 
-\begin{longtable}[]{@{}ll@{}}
+\begin{center}
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lr@{}}
 \toprule
 horizon & response \\
 \midrule
-\endhead
 1.000000 & -0.001236 \\
 2.000000 & 0.001074 \\
 3.000000 & -0.000545 \\
 4.000000 & 0.000276 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\end{adjustbox}
+\endgroup
+\end{center}
 
 \begin{itemize}
 \tightlist
@@ -1165,7 +1264,7 @@ study}\label{appendix-to-do-list-for-the-next-panel-data-study}}
   code comments.
 \item[$\square$]
   Keep an ordered folder of outputs: data, tables, figures, report,
-  prompts.
+  and work notes.
 \item[$\square$]
   Export final tables in both machine-readable and human-readable
   formats.
@@ -1176,3 +1275,5 @@ study}\label{appendix-to-do-list-for-the-next-panel-data-study}}
   Finish with a limitations paragraph and a short agenda for future
   work.
 \end{itemize}
+
+\end{document}

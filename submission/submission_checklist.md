@@ -8,9 +8,8 @@
 - [x] Preferred software code is present in Python.
 - [x] Code translated into Stata is included.
 - [x] Code translated into R is included.
-- [x] Written answers are included in Markdown, DOCX, and TEX.
-- [ ] Written answers in PDF. Not generated locally because no PDF engine was available in the workspace.
-- [x] LLM prompts and answers file is included for the available session transcript.
+- [x] Written answers are included in Markdown, DOCX, TEX, and PDF.
+- [x] LLM prompts and answers files are included in Markdown, DOCX, and PDF for the available session transcript.
 - [x] Ordered to-do list is included in the report appendix.
 
 ## Additional useful files
@@ -23,4 +22,4 @@
 
 ## Remaining technical gap
 
-- The only unmet export target in this environment is a compiled PDF, because no local PDF engine for Markdown/LaTeX conversion was installed.
+- No major packaging gap remains in the local submission folder. The transcript file reflects the accessible working session only.
